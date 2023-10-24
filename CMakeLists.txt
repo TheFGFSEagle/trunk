@@ -8,8 +8,12 @@ if(CMAKE_VERSION VERSION_LESS "3.7.0")
 	set(CMAKE_INCLUDE_CURRENT_DIR ON)
 endif()
 
-set(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/CMakeModules;${CMAKE_MODULE_PATH}")
+set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/CMakeModules;${CMAKE_MODULE_PATH}")
 set_property(GLOBAL PROPERTY FIND_LIBRARY_USE_LIB64_PATHS TRUE)
+include_directories("${CMAKE_CURRENT_SOURCE_DIR}/include" "${CMAKE_CURRENT_BINARY_DIR}/include")
+configure_file("${CMAKE_CURRENT_SOURCE_DIR}/include/trunk/config.hpp.in" "${CMAKE_CURRENT_BINARY_DIR}/include/trunk/config.hpp")
+
+find_package(fmt REQUIRED)
 
 add_subdirectory(3rdparty)
 add_subdirectory(src)
